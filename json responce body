@@ -1,0 +1,34 @@
+
+
+    @frappe.whitelist()
+    def get_gst_data(self):
+
+        try:
+
+            payload={
+
+                    }
+            files=[]
+            headers = {}
+            response = make_get_request("https://app.signalx.ai/apps/gst-verification/gstin-overview/" + self.gstin,auth=None,headers=headers, data=payload)
+            self.details = []
+            # for res in response:
+            # 33ABJFS7270E1Z4
+            # if response:
+                # frappe.msgprint(_('{}'.format(response['principal_place_of_business'])))
+            if ('{}'.format(response['gstin'])) == self.gstin:
+                # frappe.msgprint(_('{}'.format(response['gstin_uin_status'])))
+                if ('{}'.format(response['gstin_uin_status'])) == 'Active':
+                    self.gst_status = ('{}'.format(response['gstin_uin_status']))
+                    self.address_line_1 = ('{}'.format(response['principal_place_of_business']))
+                    # self.gst_status = ('{}'.format(response['gstin_uin_status']))
+
+
+
+
+        except Exception:
+
+            frappe.log_error()
+            frappe.throw(
+                _("Something went wrong while generating dropbox access token. Please check error log for more details.")
+            )
