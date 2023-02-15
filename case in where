@@ -1,0 +1,4 @@
+@frappe.whitelist()
+def get_salary_process(name,name1,name2,name3):
+    company = frappe.db.sql("SELECT name, employee_name FROM `tabEmployee` WHERE 1=1 AND (CASE WHEN %(string1)s  != '' THEN grade=%(string1)s ELSE 1=1 END) AND (CASE WHEN %(string2)s  != '' THEN designation=%(string2)s ELSE 1=1 END) AND (CASE WHEN %(string3)s != '' THEN department=%(string3)s ELSE 1=1 END) AND (CASE WHEN %(string4)s  != '' THEN branch=%(string4)s ELSE 1=1 END)",{'string1': name,'string2': name1,'string3': name2,'string4': name3,},as_dict=1)
+    return company
