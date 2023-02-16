@@ -1,0 +1,10 @@
+var delayInMilliseconds = 1000; 
+	setTimeout(function() {
+	  frappe.utils.print(
+			frm.doc.doctype,
+			frm.doc.name,
+			'Estimate Sales',
+			frm.doc.letter_head,
+			frm.doc.language || frappe.boot.lang
+		);
+	}, delayInMilliseconds);
